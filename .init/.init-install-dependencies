@@ -1,0 +1,4 @@
+{
+    "command": "./gradlew dependencies",
+    "working_directory": "/home/kavia/workspace/code-generation/secure-biometric-authentication-sample-2411-2431/android_kotlin_frontend"
+}
