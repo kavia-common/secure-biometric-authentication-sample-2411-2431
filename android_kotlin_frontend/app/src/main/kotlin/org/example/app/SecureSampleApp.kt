@@ -44,14 +44,27 @@ class SecureSampleApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        // IMPORTANT:
+        // Capture the current default handler BEFORE replacing it.
+        // If we capture it after setDefaultUncaughtExceptionHandler(), we'd capture ourselves and
+        // create an infinite recursion on any crash (white screen -> immediate exit).
+        val previousDefaultHandler = Thread.getDefaultUncaughtExceptionHandler()
+
         // As an additional safety net in preview environments, capture uncaught exceptions
         // and persist a short message so the next launch can show a screen instead of "silent exit".
-        Thread.setDefaultUncaughtExceptionHandler { _, t ->
-            // Persist for next launch so DiagnosticActivity can display it.
-            CrashMarker.writeStartupCrashMarker(this, t)
+        Thread.setDefaultUncaughtExceptionHandler { thread, t ->
+            // Best-effort marker write; never throw from the exception handler.
+            runCatching { CrashMarker.writeStartupCrashMarker(this, t) }
             recordInitFailureIfEmpty(t)
+
             // Delegate to the prior handler to preserve default behavior outside preview.
-            DEFAULT_HANDLER?.uncaughtException(Thread.currentThread(), t)
+            // Guard against accidental self-recursion.
+            if (previousDefaultHandler != null && previousDefaultHandler !== Thread.getDefaultUncaughtExceptionHandler()) {
+                previousDefaultHandler.uncaughtException(thread, t)
+            } else if (previousDefaultHandler != null && previousDefaultHandler !== this) {
+                // In practice, the `!== this` check is just belt-and-suspenders; the handler is not an Application.
+                previousDefaultHandler.uncaughtException(thread, t)
+            }
         }
 
         // Determine safe mode using manifest meta-data; default is OFF unless explicitly enabled.
@@ -116,6 +129,5 @@ class SecureSampleApp : Application() {
     private companion object {
         private const val TAG = "SecureSampleApp"
         private const val META_PREVIEW_SAFE_MODE = "org.example.app.PREVIEW_SAFE_MODE"
-        private val DEFAULT_HANDLER = Thread.getDefaultUncaughtExceptionHandler()
     }
 }
