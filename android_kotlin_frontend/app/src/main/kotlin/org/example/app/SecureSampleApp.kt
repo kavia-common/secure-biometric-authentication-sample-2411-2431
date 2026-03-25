@@ -74,16 +74,17 @@ class SecureSampleApp : Application() {
                 false
             }
 
-            // If there is no prior handler to crash the app (or delegation failed),
-            // do NOT force-kill the process in preview-safe mode. Hosted preview runtimes will
-            // interpret that as an "auto-close" and you'll never see DiagnosticActivity.
-            //
-            // Outside preview-safe mode we preserve the prior behavior (explicit termination)
-            // to avoid undefined states after an uncaught exception.
+            // Preview stability guarantee:
+            // In preview-safe mode we must never explicitly terminate the process from here.
+            // Hosted preview runtimes interpret explicit kills/exits as an "auto-close" and you
+            // won't get a chance to see DiagnosticActivity on relaunch.
+            if (isPreviewSafeMode) {
+                return@UncaughtExceptionHandler
+            }
+
+            // Outside preview-safe mode we preserve prior/default behavior as much as possible:
+            // delegate first; if we cannot delegate, terminate to avoid undefined state.
             if (!delegated) {
-                if (isPreviewSafeMode) {
-                    return@UncaughtExceptionHandler
-                }
                 runCatching { android.os.Process.killProcess(android.os.Process.myPid()) }
                 runCatching { kotlin.system.exitProcess(10) }
             }
