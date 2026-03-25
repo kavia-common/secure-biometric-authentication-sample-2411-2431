@@ -17,25 +17,44 @@ class SecureSampleApp : Application() {
     lateinit var apiClient: ApiClient
         private set
 
+    /**
+     * If non-null, the app had to fall back due to an initialization failure.
+     * MainActivity can use this to show a non-crashing "safe mode" screen in preview.
+     */
+    @Volatile
+    var initFailureMessage: String? = null
+        private set
+
     override fun onCreate() {
         super.onCreate()
 
         // Some preview/emulator environments can throw during crypto/keystore setup or other
         // initialization paths. If that happens in Application.onCreate, the app will
         // immediately crash/auto-close. We must never crash at this stage.
-        runCatching {
+        val initResult = runCatching {
             tokenStore = TokenStore(applicationContext)
             authManager = AuthManager(applicationContext, tokenStore)
             apiClient = ApiClient(authManager)
-        }.onFailure { t ->
-            Log.e(TAG, "App initialization failed; falling back to non-encrypted token storage.", t)
+        }
 
-            // Fallback: allow the app to launch even if secure components fail to initialize.
-            // TokenStore already attempts encryption first and falls back internally, but we
-            // keep this extra safety net to ensure preview stability.
-            tokenStore = TokenStore(applicationContext)
-            authManager = AuthManager(applicationContext, tokenStore)
-            apiClient = ApiClient(authManager)
+        if (initResult.isFailure) {
+            val t = initResult.exceptionOrNull()
+            initFailureMessage = t?.message ?: t?.javaClass?.simpleName ?: "Unknown init error"
+            Log.e(TAG, "App initialization failed; running in safe mode.", t)
+
+            // Absolute last-resort fallback: initialize to something valid so the activity
+            // doesn't crash due to uninitialized lateinit properties.
+            //
+            // TokenStore already falls back internally if EncryptedSharedPreferences fails,
+            // so in most cases this will succeed. If it still fails, we swallow the error
+            // and keep initFailureMessage set so the UI can display the problem.
+            runCatching {
+                tokenStore = TokenStore(applicationContext)
+                authManager = AuthManager(applicationContext, tokenStore)
+                apiClient = ApiClient(authManager)
+            }.onFailure { t2 ->
+                Log.e(TAG, "Safe-mode initialization also failed; app will show error UI.", t2)
+            }
         }
     }
 

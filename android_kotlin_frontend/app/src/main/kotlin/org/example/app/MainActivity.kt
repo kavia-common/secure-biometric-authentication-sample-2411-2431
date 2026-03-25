@@ -26,7 +26,10 @@ class MainActivity : AppCompatActivity() {
         container = findViewById(R.id.rootContainer)
 
         // Lifecycle-aware lock when app backgrounds.
-        ProcessLifecycleOwner.get().lifecycle.addObserver(AppLockObserver(app.authManager))
+        // Guarded to prevent preview-specific lifecycle initialization crashes from killing launch.
+        runCatching {
+            ProcessLifecycleOwner.get().lifecycle.addObserver(AppLockObserver(app.authManager))
+        }
 
         render()
     }
@@ -38,12 +41,38 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun render() {
+        // If Application initialization failed in preview, show an error screen instead of crashing.
+        val initFailure = app.initFailureMessage
+        if (initFailure != null) {
+            showInitFailure(initFailure)
+            return
+        }
+
         val auth = app.authManager
         when {
             !auth.isLoggedIn() -> showLogin()
             auth.isLocked -> showLocked()
             else -> showMain()
         }
+    }
+
+    private fun showInitFailure(message: String) {
+        val root = LayoutInflater.from(this).inflate(
+            R.layout.screen_login,
+            findViewById(R.id.rootContainer),
+            false
+        )
+        setRoot(root)
+
+        // Reuse login screen as a minimal UI surface; disable actions and show error.
+        root.findViewById<EditText>(R.id.usernameInput).isEnabled = false
+        root.findViewById<EditText>(R.id.passwordInput).isEnabled = false
+        root.findViewById<Button>(R.id.loginButton).apply {
+            isEnabled = false
+            text = "App failed to initialize"
+        }
+        root.findViewById<TextView>(R.id.loginStatus).text =
+            "Startup error (safe mode):\n$message"
     }
 
     private fun showLogin() {
