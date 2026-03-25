@@ -68,8 +68,18 @@ class SecureSampleApp : Application() {
 
             // Delegate to the prior handler to preserve default behavior outside preview.
             // Only delegate when it is a different instance than our handler.
-            if (previousDefaultHandler != null && previousDefaultHandler !== ourHandler) {
-                runCatching { previousDefaultHandler.uncaughtException(thread, t) }
+            val delegated = if (previousDefaultHandler != null && previousDefaultHandler !== ourHandler) {
+                runCatching { previousDefaultHandler.uncaughtException(thread, t) }.isSuccess
+            } else {
+                false
+            }
+
+            // If there is no prior handler to crash the app (or delegation failed),
+            // terminate explicitly. Some hosted preview runtimes behave badly when a crash
+            // is "swallowed" (white screen / immediate close without logs).
+            if (!delegated) {
+                runCatching { android.os.Process.killProcess(android.os.Process.myPid()) }
+                runCatching { kotlin.system.exitProcess(10) }
             }
         }
 
