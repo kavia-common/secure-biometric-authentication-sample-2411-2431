@@ -1,10 +1,13 @@
 package org.example.app
 
 import android.os.Bundle
+import android.util.TypedValue
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ProcessLifecycleOwner
@@ -20,20 +23,29 @@ class MainActivity : AppCompatActivity() {
     private lateinit var container: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        // Hosted preview environments may swallow logs and just "auto-close" on any early crash.
+        // This is a last-resort guard to keep the process alive and show a screen even if
+        // inflation/lifecycle wiring fails for device-specific reasons.
+        try {
+            super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_main)
-        container = findViewById(R.id.rootContainer)
+            setContentView(R.layout.activity_main)
+            container = findViewById(R.id.rootContainer)
 
-        // Lifecycle-aware lock when app backgrounds.
-        // In preview-safe mode we skip this wiring entirely to reduce chances of startup crashes.
-        if (!app.isPreviewSafeMode) {
-            runCatching {
-                ProcessLifecycleOwner.get().lifecycle.addObserver(AppLockObserver(app.authManager))
+            // Lifecycle-aware lock when app backgrounds.
+            // In preview-safe mode we skip this wiring entirely to reduce chances of startup crashes.
+            if (!app.isPreviewSafeMode) {
+                runCatching {
+                    ProcessLifecycleOwner.get().lifecycle.addObserver(AppLockObserver(app.authManager))
+                }
             }
-        }
 
-        render()
+            render()
+        } catch (t: Throwable) {
+            // Record for subsequent renders and show an in-code error screen (no XML inflation).
+            app.recordInitFailureIfEmpty(t)
+            showFatalStartupScreen(t)
+        }
     }
 
     override fun onResume() {
@@ -56,6 +68,41 @@ class MainActivity : AppCompatActivity() {
             auth.isLocked -> showLocked()
             else -> showMain()
         }
+    }
+
+    private fun showFatalStartupScreen(t: Throwable) {
+        // Do not inflate any XML here (inflation might be the cause of the crash).
+        val paddingPx = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            24f,
+            resources.displayMetrics
+        ).toInt()
+
+        val root = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(paddingPx, paddingPx, paddingPx, paddingPx)
+            gravity = Gravity.CENTER_HORIZONTAL
+        }
+
+        val title = TextView(this).apply {
+            text = "Startup failed (preview-safe)"
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
+        }
+        val body = TextView(this).apply {
+            text = buildString {
+                append("The app hit an exception during startup and would normally exit.\n\n")
+                append(t::class.java.simpleName)
+                t.message?.let { msg ->
+                    append(": ").append(msg)
+                }
+                append("\n\nYou can reload the preview. The app should stay open now.")
+            }
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f)
+        }
+
+        root.addView(title)
+        root.addView(body)
+        setContentView(root)
     }
 
     private fun showInitFailure(message: String) {

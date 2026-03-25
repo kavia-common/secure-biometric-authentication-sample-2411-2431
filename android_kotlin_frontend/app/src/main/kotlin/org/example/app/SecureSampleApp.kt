@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.util.Log
 import org.example.app.auth.AuthManager
 import org.example.app.auth.TokenStore
+import org.example.app.diagnostics.CrashMarker
 import org.example.app.net.ApiClient
 
 class SecureSampleApp : Application() {
@@ -43,6 +44,53 @@ class SecureSampleApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        // IMPORTANT:
+        // Capture the current default handler BEFORE replacing it.
+        // If we capture it after setDefaultUncaughtExceptionHandler(), we'd capture ourselves and
+        // create an infinite recursion on any crash (white screen -> immediate exit).
+        val previousDefaultHandler = Thread.getDefaultUncaughtExceptionHandler()
+
+        // We keep a reference to our handler so we can compare identity safely.
+        // Also include a simple recursion guard to prevent re-entrancy if delegation triggers us again.
+        var handlingCrash = false
+        lateinit var ourHandler: Thread.UncaughtExceptionHandler
+
+        // As an additional safety net in preview environments, capture uncaught exceptions
+        // and persist a short message so the next launch can show a screen instead of "silent exit".
+        ourHandler = Thread.UncaughtExceptionHandler { thread, t ->
+            // Best-effort marker write; never throw from the exception handler.
+            runCatching { CrashMarker.writeStartupCrashMarker(this, t) }
+            recordInitFailureIfEmpty(t)
+
+            // Prevent infinite recursion if something causes this handler to be invoked again.
+            if (handlingCrash) return@UncaughtExceptionHandler
+            handlingCrash = true
+
+            // Delegate to the prior handler to preserve default behavior outside preview.
+            // Only delegate when it is a different instance than our handler.
+            val delegated = if (previousDefaultHandler != null && previousDefaultHandler !== ourHandler) {
+                runCatching { previousDefaultHandler.uncaughtException(thread, t) }.isSuccess
+            } else {
+                false
+            }
+
+            // If there is no prior handler to crash the app (or delegation failed),
+            // do NOT force-kill the process in preview-safe mode. Hosted preview runtimes will
+            // interpret that as an "auto-close" and you'll never see DiagnosticActivity.
+            //
+            // Outside preview-safe mode we preserve the prior behavior (explicit termination)
+            // to avoid undefined states after an uncaught exception.
+            if (!delegated) {
+                if (isPreviewSafeMode) {
+                    return@UncaughtExceptionHandler
+                }
+                runCatching { android.os.Process.killProcess(android.os.Process.myPid()) }
+                runCatching { kotlin.system.exitProcess(10) }
+            }
+        }
+
+        Thread.setDefaultUncaughtExceptionHandler(ourHandler)
+
         // Determine safe mode using manifest meta-data; default is OFF unless explicitly enabled.
         // We enable it in AndroidManifest.xml for preview stability.
         isPreviewSafeMode = runCatching {
@@ -65,7 +113,7 @@ class SecureSampleApp : Application() {
 
         if (initResult.isFailure) {
             val t = initResult.exceptionOrNull()
-            initFailureMessage = t?.message ?: t?.javaClass?.simpleName ?: "Unknown init error"
+            recordInitFailureIfEmpty(t)
             Log.e(TAG, "App initialization failed; running in safe mode.", t)
 
             // Absolute last-resort fallback: initialize only local components.
@@ -78,6 +126,18 @@ class SecureSampleApp : Application() {
                 Log.e(TAG, "Safe-mode initialization also failed; app will show error UI.", t2)
             }
         }
+    }
+
+    // PUBLIC_INTERFACE
+    fun recordInitFailureIfEmpty(t: Throwable?) {
+        /**
+         * Records an initialization failure message if one hasn't already been recorded.
+         * This is used by Activity-level crash guards so preview environments show a UI
+         * rather than auto-exiting without logs.
+         */
+        if (initFailureMessage != null) return
+        initFailureMessage = t?.message ?: t?.javaClass?.simpleName ?: "Unknown init error"
+        isPreviewSafeMode = true
     }
 
     /**
