@@ -1,6 +1,7 @@
 package org.example.app.auth
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 
@@ -8,20 +9,30 @@ class TokenStore(context: Context) {
 
     private val appContext = context.applicationContext
 
-    private val masterKey: MasterKey by lazy {
-        MasterKey.Builder(appContext)
-            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-            .build()
-    }
+    /**
+     * EncryptedSharedPreferences (backed by Android Keystore) can throw at runtime on some
+     * preview/emulator environments (e.g., keystore not ready, device/user not unlocked, etc.).
+     *
+     * If that happens at launch, the app would crash immediately. To keep the sample usable in
+     * preview, we fall back to normal SharedPreferences when encryption cannot be initialized.
+     */
+    private val prefs: SharedPreferences by lazy {
+        try {
+            val masterKey = MasterKey.Builder(appContext)
+                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                .build()
 
-    private val prefs by lazy {
-        EncryptedSharedPreferences.create(
-            appContext,
-            PREFS_NAME,
-            masterKey,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        )
+            EncryptedSharedPreferences.create(
+                appContext,
+                PREFS_NAME,
+                masterKey,
+                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            )
+        } catch (_: Throwable) {
+            // Minimal safe fallback for preview stability.
+            appContext.getSharedPreferences(PREFS_NAME_FALLBACK, Context.MODE_PRIVATE)
+        }
     }
 
     fun save(tokenPair: TokenPair) {
@@ -45,7 +56,9 @@ class TokenStore(context: Context) {
     }
 
     companion object {
-        private const val PREFS_NAME = "secure_tokens"
+        private const val PREFS_NAME = "secure_tokens_encrypted"
+        private const val PREFS_NAME_FALLBACK = "secure_tokens_fallback"
+
         private const val KEY_ACCESS = "access_token"
         private const val KEY_REFRESH = "refresh_token"
         private const val KEY_ACCESS_EXPIRY = "access_expiry_ms"
