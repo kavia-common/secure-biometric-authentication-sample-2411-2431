@@ -1,0 +1,44 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lockedRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorBackground"
+    android:padding="24dp"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/lockedTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_locked"
+        android:textColor="@color/colorText"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/lockedSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Authenticate to continue. Device credential fallback is enabled (PIN/passcode)."
+        android:textColor="@color/colorText"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/unlockButton"
+        style="@style/Widget.PrimaryButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="@string/action_unlock" />
+
+    <TextView
+        android:id="@+id/lockedStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textColor="@color/colorError"
+        android:textSize="13sp" />
+
+</LinearLayout>
