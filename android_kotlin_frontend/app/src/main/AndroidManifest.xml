@@ -9,6 +9,15 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.SecureSample">
 
+        <!--
+          Preview-safe mode:
+          Hosted preview/emulator environments may crash on startup due to keystore/biometric/network init.
+          This flag lets the app disable fragile initialization at launch to prevent auto-close.
+        -->
+        <meta-data
+            android:name="org.example.app.PREVIEW_SAFE_MODE"
+            android:value="true" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

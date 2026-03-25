@@ -26,9 +26,11 @@ class MainActivity : AppCompatActivity() {
         container = findViewById(R.id.rootContainer)
 
         // Lifecycle-aware lock when app backgrounds.
-        // Guarded to prevent preview-specific lifecycle initialization crashes from killing launch.
-        runCatching {
-            ProcessLifecycleOwner.get().lifecycle.addObserver(AppLockObserver(app.authManager))
+        // In preview-safe mode we skip this wiring entirely to reduce chances of startup crashes.
+        if (!app.isPreviewSafeMode) {
+            runCatching {
+                ProcessLifecycleOwner.get().lifecycle.addObserver(AppLockObserver(app.authManager))
+            }
         }
 
         render()
@@ -157,9 +159,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         root.findViewById<Button>(R.id.callApiButton).setOnClickListener {
+            val apiClient = app.getOrCreateApiClient()
+            if (apiClient == null) {
+                apiOutput.text =
+                    "API disabled in preview-safe mode (or failed to initialize)."
+                return@setOnClickListener
+            }
+
             apiOutput.text = "Calling API..."
             lifecycleScope.launch {
-                val result = runCatching { app.apiClient.service.get() }
+                val result = runCatching { apiClient.service.get() }
                 apiOutput.text = result.getOrElse { "API error: ${it.message}" }
             }
         }
