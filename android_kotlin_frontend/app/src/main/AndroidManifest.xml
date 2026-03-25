@@ -19,7 +19,7 @@
             android:value="true" />
 
         <activity
-            android:name="org.example.app.MainActivity"
+            android:name="org.example.app.diagnostics.DiagnosticActivity"
             android:exported="true"
             android:launchMode="singleTask">
             <intent-filter>
@@ -27,6 +27,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="org.example.app.MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask" />
 
     </application>
 </manifest>

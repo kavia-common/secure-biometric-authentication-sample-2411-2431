@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.util.Log
 import org.example.app.auth.AuthManager
 import org.example.app.auth.TokenStore
+import org.example.app.diagnostics.CrashMarker
 import org.example.app.net.ApiClient
 
 class SecureSampleApp : Application() {
@@ -46,6 +47,8 @@ class SecureSampleApp : Application() {
         // As an additional safety net in preview environments, capture uncaught exceptions
         // and persist a short message so the next launch can show a screen instead of "silent exit".
         Thread.setDefaultUncaughtExceptionHandler { _, t ->
+            // Persist for next launch so DiagnosticActivity can display it.
+            CrashMarker.writeStartupCrashMarker(this, t)
             recordInitFailureIfEmpty(t)
             // Delegate to the prior handler to preserve default behavior outside preview.
             DEFAULT_HANDLER?.uncaughtException(Thread.currentThread(), t)
