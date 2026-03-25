@@ -75,9 +75,15 @@ class SecureSampleApp : Application() {
             }
 
             // If there is no prior handler to crash the app (or delegation failed),
-            // terminate explicitly. Some hosted preview runtimes behave badly when a crash
-            // is "swallowed" (white screen / immediate close without logs).
+            // do NOT force-kill the process in preview-safe mode. Hosted preview runtimes will
+            // interpret that as an "auto-close" and you'll never see DiagnosticActivity.
+            //
+            // Outside preview-safe mode we preserve the prior behavior (explicit termination)
+            // to avoid undefined states after an uncaught exception.
             if (!delegated) {
+                if (isPreviewSafeMode) {
+                    return@UncaughtExceptionHandler
+                }
                 runCatching { android.os.Process.killProcess(android.os.Process.myPid()) }
                 runCatching { kotlin.system.exitProcess(10) }
             }
