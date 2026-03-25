@@ -43,6 +43,14 @@ class SecureSampleApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        // As an additional safety net in preview environments, capture uncaught exceptions
+        // and persist a short message so the next launch can show a screen instead of "silent exit".
+        Thread.setDefaultUncaughtExceptionHandler { _, t ->
+            recordInitFailureIfEmpty(t)
+            // Delegate to the prior handler to preserve default behavior outside preview.
+            DEFAULT_HANDLER?.uncaughtException(Thread.currentThread(), t)
+        }
+
         // Determine safe mode using manifest meta-data; default is OFF unless explicitly enabled.
         // We enable it in AndroidManifest.xml for preview stability.
         isPreviewSafeMode = runCatching {
@@ -65,7 +73,7 @@ class SecureSampleApp : Application() {
 
         if (initResult.isFailure) {
             val t = initResult.exceptionOrNull()
-            initFailureMessage = t?.message ?: t?.javaClass?.simpleName ?: "Unknown init error"
+            recordInitFailureIfEmpty(t)
             Log.e(TAG, "App initialization failed; running in safe mode.", t)
 
             // Absolute last-resort fallback: initialize only local components.
@@ -78,6 +86,18 @@ class SecureSampleApp : Application() {
                 Log.e(TAG, "Safe-mode initialization also failed; app will show error UI.", t2)
             }
         }
+    }
+
+    // PUBLIC_INTERFACE
+    fun recordInitFailureIfEmpty(t: Throwable?) {
+        /**
+         * Records an initialization failure message if one hasn't already been recorded.
+         * This is used by Activity-level crash guards so preview environments show a UI
+         * rather than auto-exiting without logs.
+         */
+        if (initFailureMessage != null) return
+        initFailureMessage = t?.message ?: t?.javaClass?.simpleName ?: "Unknown init error"
+        isPreviewSafeMode = true
     }
 
     /**
@@ -93,5 +113,6 @@ class SecureSampleApp : Application() {
     private companion object {
         private const val TAG = "SecureSampleApp"
         private const val META_PREVIEW_SAFE_MODE = "org.example.app.PREVIEW_SAFE_MODE"
+        private val DEFAULT_HANDLER = Thread.getDefaultUncaughtExceptionHandler()
     }
 }
