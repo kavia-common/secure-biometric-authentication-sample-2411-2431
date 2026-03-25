@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Secure Biometric Auth Sample</string>
+
+    <string name="title_login">Sign in</string>
+    <string name="title_locked">App locked</string>
+    <string name="title_main">Authenticated</string>
+
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+
+    <string name="action_login">Login</string>
+    <string name="action_unlock">Unlock with biometrics</string>
+    <string name="action_call_api">Call API</string>
+    <string name="action_logout">Logout</string>
+
+    <string name="status_logged_out">You are logged out.</string>
+</resources>
