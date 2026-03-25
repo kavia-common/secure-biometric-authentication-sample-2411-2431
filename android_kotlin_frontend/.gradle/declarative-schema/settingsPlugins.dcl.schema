@@ -6,8 +6,6 @@
             "packageName": "org.gradle.internal.declarativedsl.plugins",
             "simpleName": "PluginsTopLevelReceiver"
         },
-        "javaTypeName": "org.gradle.internal.declarativedsl.plugins.PluginsTopLevelReceiver",
-        "javaTypeArgumentTypeNames": [],
         "supertypes": [
             {
                 "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
@@ -15,7 +13,8 @@
                 "simpleName": "Any"
             }
         ],
-        "properties": [],
+        "properties": [
+        ],
         "memberFunctions": [
             {
                 "type": "dataMemberFunction",
@@ -28,7 +27,8 @@
                     }
                 },
                 "simpleName": "plugins",
-                "parameters": [],
+                "parameters": [
+                ],
                 "isDirectAccessOnly": true,
                 "semantics": {
                     "type": "accessAndConfigure",
@@ -52,9 +52,10 @@
                 }
             }
         ],
-        "constructors": []
+        "constructors": [
+        ]
     },
-    "dataClassTypesByFqName": [
+    "dataClassesByFqName": [
         {
             "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
             "packageName": "org.gradle.internal.declarativedsl.plugins",
@@ -67,8 +68,6 @@
                 "packageName": "org.gradle.internal.declarativedsl.plugins",
                 "simpleName": "PluginsTopLevelReceiver"
             },
-            "javaTypeName": "org.gradle.internal.declarativedsl.plugins.PluginsTopLevelReceiver",
-            "javaTypeArgumentTypeNames": [],
             "supertypes": [
                 {
                     "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
@@ -76,7 +75,8 @@
                     "simpleName": "Any"
                 }
             ],
-            "properties": [],
+            "properties": [
+            ],
             "memberFunctions": [
                 {
                     "type": "dataMemberFunction",
@@ -89,7 +89,8 @@
                         }
                     },
                     "simpleName": "plugins",
-                    "parameters": [],
+                    "parameters": [
+                    ],
                     "isDirectAccessOnly": true,
                     "semantics": {
                         "type": "accessAndConfigure",
@@ -113,32 +114,8 @@
                     }
                 }
             ],
-            "constructors": []
-        },
-        {
-            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-            "packageName": "java.io",
-            "simpleName": "Serializable"
-        },
-        {
-            "type": "data",
-            "name": {
-                "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                "packageName": "java.io",
-                "simpleName": "Serializable"
-            },
-            "javaTypeName": "java.io.Serializable",
-            "javaTypeArgumentTypeNames": [],
-            "supertypes": [
-                {
-                    "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                    "packageName": "kotlin",
-                    "simpleName": "Any"
-                }
-            ],
-            "properties": [],
-            "memberFunctions": [],
-            "constructors": []
+            "constructors": [
+            ]
         },
         {
             "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
@@ -152,8 +129,6 @@
                 "packageName": "org.gradle.internal.declarativedsl.plugins",
                 "simpleName": "PluginsCollectingPluginsBlock"
             },
-            "javaTypeName": "org.gradle.internal.declarativedsl.plugins.PluginsCollectingPluginsBlock",
-            "javaTypeArgumentTypeNames": [],
             "supertypes": [
                 {
                     "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
@@ -166,7 +141,8 @@
                     "simpleName": "Any"
                 }
             ],
-            "properties": [],
+            "properties": [
+            ],
             "memberFunctions": [
                 {
                     "type": "dataMemberFunction",
@@ -191,7 +167,21 @@
                             },
                             "isDefault": false,
                             "semantics": {
-                                "type": "unknown"
+                                "type": "storeValueInProperty",
+                                "dataProperty": {
+                                    "type": "dataProperty",
+                                    "name": "id",
+                                    "valueType": {
+                                        "type": "dataTypeRefType",
+                                        "dataType": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "mode": {
+                                        "type": "org.gradle.internal.declarativedsl.analysis.DefaultDataProperty.DefaultPropertyMode.DefaultReadOnly"
+                                    },
+                                    "hasDefaultValue": true
+                                }
                             }
                         }
                     ],
@@ -234,7 +224,21 @@
                             },
                             "isDefault": false,
                             "semantics": {
-                                "type": "unknown"
+                                "type": "storeValueInProperty",
+                                "dataProperty": {
+                                    "type": "dataProperty",
+                                    "name": "id",
+                                    "valueType": {
+                                        "type": "dataTypeRefType",
+                                        "dataType": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "mode": {
+                                        "type": "org.gradle.internal.declarativedsl.analysis.DefaultDataProperty.DefaultPropertyMode.DefaultReadOnly"
+                                    },
+                                    "hasDefaultValue": true
+                                }
                             }
                         }
                     ],
@@ -255,7 +259,8 @@
                     }
                 }
             ],
-            "constructors": []
+            "constructors": [
+            ]
         },
         {
             "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
@@ -269,8 +274,6 @@
                 "packageName": "org.gradle.internal.declarativedsl.plugins",
                 "simpleName": "MutablePluginDependencySpec"
             },
-            "javaTypeName": "org.gradle.internal.declarativedsl.plugins.MutablePluginDependencySpec",
-            "javaTypeArgumentTypeNames": [],
             "supertypes": [
                 {
                     "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
@@ -296,6 +299,20 @@
                     "mode": {
                         "type": "org.gradle.internal.declarativedsl.analysis.DefaultDataProperty.DefaultPropertyMode.DefaultReadWrite"
                     },
+                    "hasDefaultValue": false
+                },
+                {
+                    "type": "dataProperty",
+                    "name": "id",
+                    "valueType": {
+                        "type": "dataTypeRefType",
+                        "dataType": {
+                            "type": "string"
+                        }
+                    },
+                    "mode": {
+                        "type": "org.gradle.internal.declarativedsl.analysis.DefaultDataProperty.DefaultPropertyMode.DefaultReadOnly"
+                    },
                     "hasDefaultValue": true
                 },
                 {
@@ -310,7 +327,7 @@
                     "mode": {
                         "type": "org.gradle.internal.declarativedsl.analysis.DefaultDataProperty.DefaultPropertyMode.DefaultReadWrite"
                     },
-                    "hasDefaultValue": true
+                    "hasDefaultValue": false
                 }
             ],
             "memberFunctions": [
@@ -350,7 +367,7 @@
                                 "mode": {
                                     "type": "org.gradle.internal.declarativedsl.analysis.DefaultDataProperty.DefaultPropertyMode.DefaultReadWrite"
                                 },
-                                "hasDefaultValue": true
+                                "hasDefaultValue": false
                             }
                         }
                     }
@@ -391,218 +408,14 @@
                                 "mode": {
                                     "type": "org.gradle.internal.declarativedsl.analysis.DefaultDataProperty.DefaultPropertyMode.DefaultReadWrite"
                                 },
-                                "hasDefaultValue": true
+                                "hasDefaultValue": false
                             }
                         }
                     }
                 }
             ],
-            "constructors": []
-        },
-        {
-            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-            "packageName": "kotlin",
-            "simpleName": "Boolean"
-        },
-        {
-            "type": "data",
-            "name": {
-                "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                "packageName": "kotlin",
-                "simpleName": "Boolean"
-            },
-            "javaTypeName": "boolean",
-            "javaTypeArgumentTypeNames": [],
-            "supertypes": [
-                {
-                    "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                    "packageName": "kotlin",
-                    "simpleName": "Comparable"
-                },
-                {
-                    "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                    "packageName": "kotlin",
-                    "simpleName": "Any"
-                },
-                {
-                    "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                    "packageName": "java.io",
-                    "simpleName": "Serializable"
-                }
-            ],
-            "properties": [],
-            "memberFunctions": [],
-            "constructors": []
-        },
-        {
-            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-            "packageName": "kotlin",
-            "simpleName": "String"
-        },
-        {
-            "type": "data",
-            "name": {
-                "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                "packageName": "kotlin",
-                "simpleName": "String"
-            },
-            "javaTypeName": "java.lang.String",
-            "javaTypeArgumentTypeNames": [],
-            "supertypes": [
-                {
-                    "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                    "packageName": "kotlin",
-                    "simpleName": "Comparable"
-                },
-                {
-                    "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                    "packageName": "kotlin",
-                    "simpleName": "Any"
-                },
-                {
-                    "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                    "packageName": "kotlin",
-                    "simpleName": "CharSequence"
-                },
-                {
-                    "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                    "packageName": "java.io",
-                    "simpleName": "Serializable"
-                }
-            ],
-            "properties": [],
-            "memberFunctions": [],
-            "constructors": []
-        },
-        {
-            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-            "packageName": "kotlin",
-            "simpleName": "CharSequence"
-        },
-        {
-            "type": "data",
-            "name": {
-                "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                "packageName": "kotlin",
-                "simpleName": "CharSequence"
-            },
-            "javaTypeName": "java.lang.CharSequence",
-            "javaTypeArgumentTypeNames": [],
-            "supertypes": [
-                {
-                    "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                    "packageName": "kotlin",
-                    "simpleName": "Any"
-                }
-            ],
-            "properties": [],
-            "memberFunctions": [],
-            "constructors": []
-        },
-        {
-            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-            "packageName": "org.gradle.plugin.use",
-            "simpleName": "PluginDependencySpec"
-        },
-        {
-            "type": "data",
-            "name": {
-                "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                "packageName": "org.gradle.plugin.use",
-                "simpleName": "PluginDependencySpec"
-            },
-            "javaTypeName": "org.gradle.plugin.use.PluginDependencySpec",
-            "javaTypeArgumentTypeNames": [],
-            "supertypes": [
-                {
-                    "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                    "packageName": "kotlin",
-                    "simpleName": "Any"
-                }
-            ],
-            "properties": [],
-            "memberFunctions": [
-                {
-                    "type": "dataBuilderFunction",
-                    "receiver": {
-                        "type": "dataTypeRefName",
-                        "fqName": {
-                            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                            "packageName": "org.gradle.plugin.use",
-                            "simpleName": "PluginDependencySpec"
-                        }
-                    },
-                    "simpleName": "version",
-                    "isDirectAccessOnly": false,
-                    "dataParameter": {
-                        "type": "org.gradle.internal.declarativedsl.analysis.DefaultDataParameter",
-                        "name": "version",
-                        "privateType": {
-                            "type": "dataTypeRefType",
-                            "dataType": {
-                                "type": "string"
-                            }
-                        },
-                        "isDefault": false,
-                        "semantics": {
-                            "type": "unknown"
-                        }
-                    }
-                },
-                {
-                    "type": "dataBuilderFunction",
-                    "receiver": {
-                        "type": "dataTypeRefName",
-                        "fqName": {
-                            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                            "packageName": "org.gradle.plugin.use",
-                            "simpleName": "PluginDependencySpec"
-                        }
-                    },
-                    "simpleName": "apply",
-                    "isDirectAccessOnly": false,
-                    "dataParameter": {
-                        "type": "org.gradle.internal.declarativedsl.analysis.DefaultDataParameter",
-                        "name": "apply",
-                        "privateType": {
-                            "type": "dataTypeRefType",
-                            "dataType": {
-                                "type": "boolean"
-                            }
-                        },
-                        "isDefault": false,
-                        "semantics": {
-                            "type": "unknown"
-                        }
-                    }
-                }
-            ],
-            "constructors": []
-        },
-        {
-            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-            "packageName": "org.gradle.plugin.use",
-            "simpleName": "PluginDependenciesSpec"
-        },
-        {
-            "type": "data",
-            "name": {
-                "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                "packageName": "org.gradle.plugin.use",
-                "simpleName": "PluginDependenciesSpec"
-            },
-            "javaTypeName": "org.gradle.plugin.use.PluginDependenciesSpec",
-            "javaTypeArgumentTypeNames": [],
-            "supertypes": [
-                {
-                    "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                    "packageName": "kotlin",
-                    "simpleName": "Any"
-                }
-            ],
-            "properties": [],
-            "memberFunctions": [],
-            "constructors": []
+            "constructors": [
+            ]
         },
         {
             "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
@@ -616,8 +429,6 @@
                 "packageName": "kotlin",
                 "simpleName": "Unit"
             },
-            "javaTypeName": "kotlin.Unit",
-            "javaTypeArgumentTypeNames": [],
             "supertypes": [
                 {
                     "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
@@ -625,1063 +436,18 @@
                     "simpleName": "Any"
                 }
             ],
-            "properties": [],
-            "memberFunctions": [],
-            "constructors": []
+            "properties": [
+            ],
+            "memberFunctions": [
+            ],
+            "constructors": [
+            ]
         }
-    ],
-    "genericSignaturesByFqName": [
-        {
-            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-            "packageName": "kotlin.collections",
-            "simpleName": "List"
-        },
-        {
-            "type": "parameterizedOpaqueTypeSignature",
-            "name": {
-                "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                "packageName": "kotlin.collections",
-                "simpleName": "List"
-            },
-            "typeParameters": [
-                {
-                    "name": "E",
-                    "isOutVariant": true
-                }
-            ],
-            "javaTypeName": "java.util.List"
-        },
-        {
-            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-            "packageName": "kotlin",
-            "simpleName": "Array"
-        },
-        {
-            "type": "org.gradle.internal.declarativedsl.analysis.DefaultVarargSignature"
-        },
-        {
-            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-            "packageName": "kotlin.collections",
-            "simpleName": "Map"
-        },
-        {
-            "type": "parameterizedOpaqueTypeSignature",
-            "name": {
-                "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                "packageName": "kotlin.collections",
-                "simpleName": "Map"
-            },
-            "typeParameters": [
-                {
-                    "name": "K",
-                    "isOutVariant": false
-                },
-                {
-                    "name": "V",
-                    "isOutVariant": true
-                }
-            ],
-            "javaTypeName": "java.util.Map"
-        },
-        {
-            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-            "packageName": "kotlin",
-            "simpleName": "Pair"
-        },
-        {
-            "type": "parameterizedOpaqueTypeSignature",
-            "name": {
-                "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                "packageName": "kotlin",
-                "simpleName": "Pair"
-            },
-            "typeParameters": [
-                {
-                    "name": "A",
-                    "isOutVariant": true
-                },
-                {
-                    "name": "B",
-                    "isOutVariant": true
-                }
-            ],
-            "javaTypeName": "kotlin.Pair"
-        }
-    ],
-    "genericInstantiationsByFqName": [
-        {
-            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-            "packageName": "kotlin.collections",
-            "simpleName": "List"
-        },
-        [
-            [
-                {
-                    "type": "concreteType",
-                    "dataType": {
-                        "type": "dataTypeRefType",
-                        "dataType": {
-                            "type": "typeVariableUsage",
-                            "variableId": 0
-                        }
-                    }
-                }
-            ],
-            {
-                "type": "parameterizedTypeInstance",
-                "typeSignature": {
-                    "type": "parameterizedOpaqueTypeSignature",
-                    "name": {
-                        "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                        "packageName": "kotlin.collections",
-                        "simpleName": "List"
-                    },
-                    "typeParameters": [
-                        {
-                            "name": "E",
-                            "isOutVariant": true
-                        }
-                    ],
-                    "javaTypeName": "java.util.List"
-                },
-                "typeArguments": [
-                    {
-                        "type": "concreteType",
-                        "dataType": {
-                            "type": "dataTypeRefType",
-                            "dataType": {
-                                "type": "typeVariableUsage",
-                                "variableId": 0
-                            }
-                        }
-                    }
-                ]
-            },
-            [
-                {
-                    "type": "concreteType",
-                    "dataType": {
-                        "type": "dataTypeRefType",
-                        "dataType": {
-                            "type": "typeVariableUsage",
-                            "variableId": 5
-                        }
-                    }
-                }
-            ],
-            {
-                "type": "parameterizedTypeInstance",
-                "typeSignature": {
-                    "type": "parameterizedOpaqueTypeSignature",
-                    "name": {
-                        "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                        "packageName": "kotlin.collections",
-                        "simpleName": "List"
-                    },
-                    "typeParameters": [
-                        {
-                            "name": "E",
-                            "isOutVariant": true
-                        }
-                    ],
-                    "javaTypeName": "java.util.List"
-                },
-                "typeArguments": [
-                    {
-                        "type": "concreteType",
-                        "dataType": {
-                            "type": "dataTypeRefType",
-                            "dataType": {
-                                "type": "typeVariableUsage",
-                                "variableId": 5
-                            }
-                        }
-                    }
-                ]
-            }
-        ],
-        {
-            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-            "packageName": "kotlin",
-            "simpleName": "Array"
-        },
-        [
-            [
-                {
-                    "type": "concreteType",
-                    "dataType": {
-                        "type": "dataTypeRefType",
-                        "dataType": {
-                            "type": "typeVariableUsage",
-                            "variableId": 0
-                        }
-                    }
-                }
-            ],
-            {
-                "type": "parameterizedTypeInstance",
-                "typeSignature": {
-                    "type": "org.gradle.internal.declarativedsl.analysis.DefaultVarargSignature"
-                },
-                "typeArguments": [
-                    {
-                        "type": "concreteType",
-                        "dataType": {
-                            "type": "dataTypeRefType",
-                            "dataType": {
-                                "type": "typeVariableUsage",
-                                "variableId": 0
-                            }
-                        }
-                    }
-                ]
-            },
-            [
-                {
-                    "type": "concreteType",
-                    "dataType": {
-                        "type": "dataTypeRefNameWithArgs",
-                        "fqName": {
-                            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                            "packageName": "kotlin",
-                            "simpleName": "Pair"
-                        },
-                        "typeArguments": [
-                            {
-                                "type": "concreteType",
-                                "dataType": {
-                                    "type": "dataTypeRefType",
-                                    "dataType": {
-                                        "type": "typeVariableUsage",
-                                        "variableId": 1
-                                    }
-                                }
-                            },
-                            {
-                                "type": "concreteType",
-                                "dataType": {
-                                    "type": "dataTypeRefType",
-                                    "dataType": {
-                                        "type": "typeVariableUsage",
-                                        "variableId": 2
-                                    }
-                                }
-                            }
-                        ]
-                    }
-                }
-            ],
-            {
-                "type": "parameterizedTypeInstance",
-                "typeSignature": {
-                    "type": "org.gradle.internal.declarativedsl.analysis.DefaultVarargSignature"
-                },
-                "typeArguments": [
-                    {
-                        "type": "concreteType",
-                        "dataType": {
-                            "type": "dataTypeRefNameWithArgs",
-                            "fqName": {
-                                "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                                "packageName": "kotlin",
-                                "simpleName": "Pair"
-                            },
-                            "typeArguments": [
-                                {
-                                    "type": "concreteType",
-                                    "dataType": {
-                                        "type": "dataTypeRefType",
-                                        "dataType": {
-                                            "type": "typeVariableUsage",
-                                            "variableId": 1
-                                        }
-                                    }
-                                },
-                                {
-                                    "type": "concreteType",
-                                    "dataType": {
-                                        "type": "dataTypeRefType",
-                                        "dataType": {
-                                            "type": "typeVariableUsage",
-                                            "variableId": 2
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                ]
-            }
-        ],
-        {
-            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-            "packageName": "kotlin.collections",
-            "simpleName": "Map"
-        },
-        [
-            [
-                {
-                    "type": "concreteType",
-                    "dataType": {
-                        "type": "dataTypeRefType",
-                        "dataType": {
-                            "type": "typeVariableUsage",
-                            "variableId": 1
-                        }
-                    }
-                },
-                {
-                    "type": "concreteType",
-                    "dataType": {
-                        "type": "dataTypeRefType",
-                        "dataType": {
-                            "type": "typeVariableUsage",
-                            "variableId": 2
-                        }
-                    }
-                }
-            ],
-            {
-                "type": "parameterizedTypeInstance",
-                "typeSignature": {
-                    "type": "parameterizedOpaqueTypeSignature",
-                    "name": {
-                        "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                        "packageName": "kotlin.collections",
-                        "simpleName": "Map"
-                    },
-                    "typeParameters": [
-                        {
-                            "name": "K",
-                            "isOutVariant": false
-                        },
-                        {
-                            "name": "V",
-                            "isOutVariant": true
-                        }
-                    ],
-                    "javaTypeName": "java.util.Map"
-                },
-                "typeArguments": [
-                    {
-                        "type": "concreteType",
-                        "dataType": {
-                            "type": "dataTypeRefType",
-                            "dataType": {
-                                "type": "typeVariableUsage",
-                                "variableId": 1
-                            }
-                        }
-                    },
-                    {
-                        "type": "concreteType",
-                        "dataType": {
-                            "type": "dataTypeRefType",
-                            "dataType": {
-                                "type": "typeVariableUsage",
-                                "variableId": 2
-                            }
-                        }
-                    }
-                ]
-            },
-            [
-                {
-                    "type": "concreteType",
-                    "dataType": {
-                        "type": "dataTypeRefType",
-                        "dataType": {
-                            "type": "typeVariableUsage",
-                            "variableId": 6
-                        }
-                    }
-                },
-                {
-                    "type": "concreteType",
-                    "dataType": {
-                        "type": "dataTypeRefType",
-                        "dataType": {
-                            "type": "typeVariableUsage",
-                            "variableId": 7
-                        }
-                    }
-                }
-            ],
-            {
-                "type": "parameterizedTypeInstance",
-                "typeSignature": {
-                    "type": "parameterizedOpaqueTypeSignature",
-                    "name": {
-                        "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                        "packageName": "kotlin.collections",
-                        "simpleName": "Map"
-                    },
-                    "typeParameters": [
-                        {
-                            "name": "K",
-                            "isOutVariant": false
-                        },
-                        {
-                            "name": "V",
-                            "isOutVariant": true
-                        }
-                    ],
-                    "javaTypeName": "java.util.Map"
-                },
-                "typeArguments": [
-                    {
-                        "type": "concreteType",
-                        "dataType": {
-                            "type": "dataTypeRefType",
-                            "dataType": {
-                                "type": "typeVariableUsage",
-                                "variableId": 6
-                            }
-                        }
-                    },
-                    {
-                        "type": "concreteType",
-                        "dataType": {
-                            "type": "dataTypeRefType",
-                            "dataType": {
-                                "type": "typeVariableUsage",
-                                "variableId": 7
-                            }
-                        }
-                    }
-                ]
-            }
-        ],
-        {
-            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-            "packageName": "kotlin",
-            "simpleName": "Pair"
-        },
-        [
-            [
-                {
-                    "type": "concreteType",
-                    "dataType": {
-                        "type": "dataTypeRefType",
-                        "dataType": {
-                            "type": "typeVariableUsage",
-                            "variableId": 1
-                        }
-                    }
-                },
-                {
-                    "type": "concreteType",
-                    "dataType": {
-                        "type": "dataTypeRefType",
-                        "dataType": {
-                            "type": "typeVariableUsage",
-                            "variableId": 2
-                        }
-                    }
-                }
-            ],
-            {
-                "type": "parameterizedTypeInstance",
-                "typeSignature": {
-                    "type": "parameterizedOpaqueTypeSignature",
-                    "name": {
-                        "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                        "packageName": "kotlin",
-                        "simpleName": "Pair"
-                    },
-                    "typeParameters": [
-                        {
-                            "name": "A",
-                            "isOutVariant": true
-                        },
-                        {
-                            "name": "B",
-                            "isOutVariant": true
-                        }
-                    ],
-                    "javaTypeName": "kotlin.Pair"
-                },
-                "typeArguments": [
-                    {
-                        "type": "concreteType",
-                        "dataType": {
-                            "type": "dataTypeRefType",
-                            "dataType": {
-                                "type": "typeVariableUsage",
-                                "variableId": 1
-                            }
-                        }
-                    },
-                    {
-                        "type": "concreteType",
-                        "dataType": {
-                            "type": "dataTypeRefType",
-                            "dataType": {
-                                "type": "typeVariableUsage",
-                                "variableId": 2
-                            }
-                        }
-                    }
-                ]
-            },
-            [
-                {
-                    "type": "concreteType",
-                    "dataType": {
-                        "type": "dataTypeRefType",
-                        "dataType": {
-                            "type": "typeVariableUsage",
-                            "variableId": 3
-                        }
-                    }
-                },
-                {
-                    "type": "concreteType",
-                    "dataType": {
-                        "type": "dataTypeRefType",
-                        "dataType": {
-                            "type": "typeVariableUsage",
-                            "variableId": 4
-                        }
-                    }
-                }
-            ],
-            {
-                "type": "parameterizedTypeInstance",
-                "typeSignature": {
-                    "type": "parameterizedOpaqueTypeSignature",
-                    "name": {
-                        "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                        "packageName": "kotlin",
-                        "simpleName": "Pair"
-                    },
-                    "typeParameters": [
-                        {
-                            "name": "A",
-                            "isOutVariant": true
-                        },
-                        {
-                            "name": "B",
-                            "isOutVariant": true
-                        }
-                    ],
-                    "javaTypeName": "kotlin.Pair"
-                },
-                "typeArguments": [
-                    {
-                        "type": "concreteType",
-                        "dataType": {
-                            "type": "dataTypeRefType",
-                            "dataType": {
-                                "type": "typeVariableUsage",
-                                "variableId": 3
-                            }
-                        }
-                    },
-                    {
-                        "type": "concreteType",
-                        "dataType": {
-                            "type": "dataTypeRefType",
-                            "dataType": {
-                                "type": "typeVariableUsage",
-                                "variableId": 4
-                            }
-                        }
-                    }
-                ]
-            }
-        ]
     ],
     "externalFunctionsByFqName": [
-        {
-            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-            "packageName": "kotlin.collections",
-            "simpleName": "listOf"
-        },
-        {
-            "type": "dataTopLevelFunction",
-            "packageName": "kotlin.collections",
-            "ownerJvmTypeName": "kotlin.collections.CollectionsKt__CollectionsKt",
-            "simpleName": "listOf",
-            "parameters": [
-                {
-                    "type": "org.gradle.internal.declarativedsl.analysis.DefaultVarargParameter",
-                    "name": "elements",
-                    "privateType": {
-                        "type": "dataTypeRefNameWithArgs",
-                        "fqName": {
-                            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                            "packageName": "kotlin",
-                            "simpleName": "Array"
-                        },
-                        "typeArguments": [
-                            {
-                                "type": "concreteType",
-                                "dataType": {
-                                    "type": "dataTypeRefType",
-                                    "dataType": {
-                                        "type": "typeVariableUsage",
-                                        "variableId": 0
-                                    }
-                                }
-                            }
-                        ]
-                    },
-                    "isDefault": false,
-                    "semantics": {
-                        "type": "unknown"
-                    }
-                }
-            ],
-            "semantics": {
-                "type": "pure",
-                "returnValueType": {
-                    "type": "dataTypeRefNameWithArgs",
-                    "fqName": {
-                        "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                        "packageName": "kotlin.collections",
-                        "simpleName": "List"
-                    },
-                    "typeArguments": [
-                        {
-                            "type": "concreteType",
-                            "dataType": {
-                                "type": "dataTypeRefType",
-                                "dataType": {
-                                    "type": "typeVariableUsage",
-                                    "variableId": 0
-                                }
-                            }
-                        }
-                    ]
-                }
-            }
-        },
-        {
-            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-            "packageName": "kotlin.collections",
-            "simpleName": "mapOf"
-        },
-        {
-            "type": "dataTopLevelFunction",
-            "packageName": "kotlin.collections",
-            "ownerJvmTypeName": "org.gradle.internal.declarativedsl.intrinsics.GradleRuntimeFunctionIntrinsicsKt",
-            "simpleName": "mapOf",
-            "parameters": [
-                {
-                    "type": "org.gradle.internal.declarativedsl.analysis.DefaultVarargParameter",
-                    "name": "pairs",
-                    "privateType": {
-                        "type": "dataTypeRefNameWithArgs",
-                        "fqName": {
-                            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                            "packageName": "kotlin",
-                            "simpleName": "Array"
-                        },
-                        "typeArguments": [
-                            {
-                                "type": "concreteType",
-                                "dataType": {
-                                    "type": "dataTypeRefNameWithArgs",
-                                    "fqName": {
-                                        "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                                        "packageName": "kotlin",
-                                        "simpleName": "Pair"
-                                    },
-                                    "typeArguments": [
-                                        {
-                                            "type": "concreteType",
-                                            "dataType": {
-                                                "type": "dataTypeRefType",
-                                                "dataType": {
-                                                    "type": "typeVariableUsage",
-                                                    "variableId": 1
-                                                }
-                                            }
-                                        },
-                                        {
-                                            "type": "concreteType",
-                                            "dataType": {
-                                                "type": "dataTypeRefType",
-                                                "dataType": {
-                                                    "type": "typeVariableUsage",
-                                                    "variableId": 2
-                                                }
-                                            }
-                                        }
-                                    ]
-                                }
-                            }
-                        ]
-                    },
-                    "isDefault": false,
-                    "semantics": {
-                        "type": "unknown"
-                    }
-                }
-            ],
-            "semantics": {
-                "type": "pure",
-                "returnValueType": {
-                    "type": "dataTypeRefNameWithArgs",
-                    "fqName": {
-                        "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                        "packageName": "kotlin.collections",
-                        "simpleName": "Map"
-                    },
-                    "typeArguments": [
-                        {
-                            "type": "concreteType",
-                            "dataType": {
-                                "type": "dataTypeRefType",
-                                "dataType": {
-                                    "type": "typeVariableUsage",
-                                    "variableId": 1
-                                }
-                            }
-                        },
-                        {
-                            "type": "concreteType",
-                            "dataType": {
-                                "type": "dataTypeRefType",
-                                "dataType": {
-                                    "type": "typeVariableUsage",
-                                    "variableId": 2
-                                }
-                            }
-                        }
-                    ]
-                }
-            }
-        }
     ],
-    "infixFunctionsByFqName": [
-        {
-            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-            "packageName": "kotlin",
-            "simpleName": "to"
-        },
-        {
-            "type": "dataTopLevelFunction",
-            "packageName": "kotlin",
-            "ownerJvmTypeName": "org.gradle.internal.declarativedsl.intrinsics.GradleRuntimeFunctionIntrinsicsKt",
-            "simpleName": "to",
-            "parameters": [
-                {
-                    "type": "org.gradle.internal.declarativedsl.analysis.DefaultDataParameter",
-                    "name": "first",
-                    "privateType": {
-                        "type": "dataTypeRefType",
-                        "dataType": {
-                            "type": "typeVariableUsage",
-                            "variableId": 3
-                        }
-                    },
-                    "isDefault": false,
-                    "semantics": {
-                        "type": "identityKey",
-                        "basedOnProperty": null
-                    }
-                },
-                {
-                    "type": "org.gradle.internal.declarativedsl.analysis.DefaultDataParameter",
-                    "name": "second",
-                    "privateType": {
-                        "type": "dataTypeRefType",
-                        "dataType": {
-                            "type": "typeVariableUsage",
-                            "variableId": 4
-                        }
-                    },
-                    "isDefault": false,
-                    "semantics": {
-                        "type": "unknown"
-                    }
-                }
-            ],
-            "semantics": {
-                "type": "pure",
-                "returnValueType": {
-                    "type": "dataTypeRefNameWithArgs",
-                    "fqName": {
-                        "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                        "packageName": "kotlin",
-                        "simpleName": "Pair"
-                    },
-                    "typeArguments": [
-                        {
-                            "type": "concreteType",
-                            "dataType": {
-                                "type": "dataTypeRefType",
-                                "dataType": {
-                                    "type": "typeVariableUsage",
-                                    "variableId": 3
-                                }
-                            }
-                        },
-                        {
-                            "type": "concreteType",
-                            "dataType": {
-                                "type": "dataTypeRefType",
-                                "dataType": {
-                                    "type": "typeVariableUsage",
-                                    "variableId": 4
-                                }
-                            }
-                        }
-                    ]
-                }
-            }
-        }
+    "externalObjectsByFqName": [
     ],
-    "externalObjectsByFqName": [],
     "defaultImports": [
-        {
-            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-            "packageName": "kotlin.collections",
-            "simpleName": "listOf"
-        },
-        {
-            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-            "packageName": "kotlin.collections",
-            "simpleName": "mapOf"
-        },
-        {
-            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-            "packageName": "kotlin",
-            "simpleName": "to"
-        }
-    ],
-    "assignmentAugmentationsByTypeName": [
-        {
-            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-            "packageName": "kotlin.collections",
-            "simpleName": "List"
-        },
-        [
-            {
-                "type": "assignmentAugmentation",
-                "kind": {
-                    "type": "org.gradle.internal.declarativedsl.analysis.AssignmentAugmentationKindInternal.DefaultPlus"
-                },
-                "function": {
-                    "type": "dataTopLevelFunction",
-                    "packageName": "org.gradle.internal.declarativedsl.common",
-                    "ownerJvmTypeName": "org.gradle.internal.declarativedsl.common.StandardLibraryComponentKt",
-                    "simpleName": "builtinListAugmentation",
-                    "parameters": [
-                        {
-                            "type": "org.gradle.internal.declarativedsl.analysis.DefaultDataParameter",
-                            "name": "lhs",
-                            "privateType": {
-                                "type": "dataTypeRefNameWithArgs",
-                                "fqName": {
-                                    "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                                    "packageName": "kotlin.collections",
-                                    "simpleName": "List"
-                                },
-                                "typeArguments": [
-                                    {
-                                        "type": "concreteType",
-                                        "dataType": {
-                                            "type": "dataTypeRefType",
-                                            "dataType": {
-                                                "type": "typeVariableUsage",
-                                                "variableId": 5
-                                            }
-                                        }
-                                    }
-                                ]
-                            },
-                            "isDefault": false,
-                            "semantics": {
-                                "type": "unknown"
-                            }
-                        },
-                        {
-                            "type": "org.gradle.internal.declarativedsl.analysis.DefaultDataParameter",
-                            "name": "rhs",
-                            "privateType": {
-                                "type": "dataTypeRefNameWithArgs",
-                                "fqName": {
-                                    "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                                    "packageName": "kotlin.collections",
-                                    "simpleName": "List"
-                                },
-                                "typeArguments": [
-                                    {
-                                        "type": "concreteType",
-                                        "dataType": {
-                                            "type": "dataTypeRefType",
-                                            "dataType": {
-                                                "type": "typeVariableUsage",
-                                                "variableId": 5
-                                            }
-                                        }
-                                    }
-                                ]
-                            },
-                            "isDefault": false,
-                            "semantics": {
-                                "type": "unknown"
-                            }
-                        }
-                    ],
-                    "semantics": {
-                        "type": "pure",
-                        "returnValueType": {
-                            "type": "dataTypeRefNameWithArgs",
-                            "fqName": {
-                                "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                                "packageName": "kotlin.collections",
-                                "simpleName": "List"
-                            },
-                            "typeArguments": [
-                                {
-                                    "type": "concreteType",
-                                    "dataType": {
-                                        "type": "dataTypeRefType",
-                                        "dataType": {
-                                            "type": "typeVariableUsage",
-                                            "variableId": 5
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        ],
-        {
-            "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-            "packageName": "kotlin.collections",
-            "simpleName": "Map"
-        },
-        [
-            {
-                "type": "assignmentAugmentation",
-                "kind": {
-                    "type": "org.gradle.internal.declarativedsl.analysis.AssignmentAugmentationKindInternal.DefaultPlus"
-                },
-                "function": {
-                    "type": "dataTopLevelFunction",
-                    "packageName": "org.gradle.internal.declarativedsl.common",
-                    "ownerJvmTypeName": "org.gradle.internal.declarativedsl.common.StandardLibraryComponentKt",
-                    "simpleName": "builtinMapAugmentation",
-                    "parameters": [
-                        {
-                            "type": "org.gradle.internal.declarativedsl.analysis.DefaultDataParameter",
-                            "name": "lhs",
-                            "privateType": {
-                                "type": "dataTypeRefNameWithArgs",
-                                "fqName": {
-                                    "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                                    "packageName": "kotlin.collections",
-                                    "simpleName": "Map"
-                                },
-                                "typeArguments": [
-                                    {
-                                        "type": "concreteType",
-                                        "dataType": {
-                                            "type": "dataTypeRefType",
-                                            "dataType": {
-                                                "type": "typeVariableUsage",
-                                                "variableId": 6
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "type": "concreteType",
-                                        "dataType": {
-                                            "type": "dataTypeRefType",
-                                            "dataType": {
-                                                "type": "typeVariableUsage",
-                                                "variableId": 7
-                                            }
-                                        }
-                                    }
-                                ]
-                            },
-                            "isDefault": false,
-                            "semantics": {
-                                "type": "unknown"
-                            }
-                        },
-                        {
-                            "type": "org.gradle.internal.declarativedsl.analysis.DefaultDataParameter",
-                            "name": "rhs",
-                            "privateType": {
-                                "type": "dataTypeRefNameWithArgs",
-                                "fqName": {
-                                    "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                                    "packageName": "kotlin.collections",
-                                    "simpleName": "Map"
-                                },
-                                "typeArguments": [
-                                    {
-                                        "type": "concreteType",
-                                        "dataType": {
-                                            "type": "dataTypeRefType",
-                                            "dataType": {
-                                                "type": "typeVariableUsage",
-                                                "variableId": 6
-                                            }
-                                        }
-                                    },
-                                    {
-                                        "type": "concreteType",
-                                        "dataType": {
-                                            "type": "dataTypeRefType",
-                                            "dataType": {
-                                                "type": "typeVariableUsage",
-                                                "variableId": 7
-                                            }
-                                        }
-                                    }
-                                ]
-                            },
-                            "isDefault": false,
-                            "semantics": {
-                                "type": "unknown"
-                            }
-                        }
-                    ],
-                    "semantics": {
-                        "type": "pure",
-                        "returnValueType": {
-                            "type": "dataTypeRefNameWithArgs",
-                            "fqName": {
-                                "type": "org.gradle.internal.declarativedsl.analysis.DefaultFqName",
-                                "packageName": "kotlin.collections",
-                                "simpleName": "Map"
-                            },
-                            "typeArguments": [
-                                {
-                                    "type": "concreteType",
-                                    "dataType": {
-                                        "type": "dataTypeRefType",
-                                        "dataType": {
-                                            "type": "typeVariableUsage",
-                                            "variableId": 6
-                                        }
-                                    }
-                                },
-                                {
-                                    "type": "concreteType",
-                                    "dataType": {
-                                        "type": "dataTypeRefType",
-                                        "dataType": {
-                                            "type": "typeVariableUsage",
-                                            "variableId": 7
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        ]
     ]
 }
