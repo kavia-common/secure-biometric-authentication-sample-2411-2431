@@ -50,22 +50,30 @@ class SecureSampleApp : Application() {
         // create an infinite recursion on any crash (white screen -> immediate exit).
         val previousDefaultHandler = Thread.getDefaultUncaughtExceptionHandler()
 
+        // We keep a reference to our handler so we can compare identity safely.
+        // Also include a simple recursion guard to prevent re-entrancy if delegation triggers us again.
+        var handlingCrash = false
+        lateinit var ourHandler: Thread.UncaughtExceptionHandler
+
         // As an additional safety net in preview environments, capture uncaught exceptions
         // and persist a short message so the next launch can show a screen instead of "silent exit".
-        Thread.setDefaultUncaughtExceptionHandler { thread, t ->
+        ourHandler = Thread.UncaughtExceptionHandler { thread, t ->
             // Best-effort marker write; never throw from the exception handler.
             runCatching { CrashMarker.writeStartupCrashMarker(this, t) }
             recordInitFailureIfEmpty(t)
 
+            // Prevent infinite recursion if something causes this handler to be invoked again.
+            if (handlingCrash) return@UncaughtExceptionHandler
+            handlingCrash = true
+
             // Delegate to the prior handler to preserve default behavior outside preview.
-            // Guard against accidental self-recursion.
-            if (previousDefaultHandler != null && previousDefaultHandler !== Thread.getDefaultUncaughtExceptionHandler()) {
-                previousDefaultHandler.uncaughtException(thread, t)
-            } else if (previousDefaultHandler != null && previousDefaultHandler !== this) {
-                // In practice, the `!== this` check is just belt-and-suspenders; the handler is not an Application.
-                previousDefaultHandler.uncaughtException(thread, t)
+            // Only delegate when it is a different instance than our handler.
+            if (previousDefaultHandler != null && previousDefaultHandler !== ourHandler) {
+                runCatching { previousDefaultHandler.uncaughtException(thread, t) }
             }
         }
+
+        Thread.setDefaultUncaughtExceptionHandler(ourHandler)
 
         // Determine safe mode using manifest meta-data; default is OFF unless explicitly enabled.
         // We enable it in AndroidManifest.xml for preview stability.
